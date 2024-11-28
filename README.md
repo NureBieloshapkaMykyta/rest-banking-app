@@ -43,7 +43,7 @@ A Bank API is a tool that lets apps and websites connect securely to your bank. 
 
 ### Testing
 
- - **Visual Studio** - open the solution in Visual Studio. Right click on assembly with tests(Bank.Server.Tests) and then click **Run tests**.
+ - **Visual Studio** - open the solution in Visual Studio. Right click on assembly with tests(Bank.Server.Tests) and then click `Run tests`.
  - **Command prompt** - open cmd or powershell, navigate to assembly with tests and run `dotnet test`.
 
 ### Swagger Documentation
