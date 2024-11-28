@@ -2,6 +2,7 @@
 using Bank.Server.Business.Abstractions;
 using Bank.Server.Core.Entities;
 using Bank.Server.Persistence;
+using Bank.Server.Shared.Constants;
 using Bank.Server.Shared.Helpers;
 using Bank.Server.Shared.Options;
 using Bank.Server.Shared.Requests.Account;
@@ -40,7 +41,7 @@ public class AccountService(BankMasterDbContext dbContext, IMapper mapper, IOpti
 
         if (account is null) 
         {
-            return new Result<AccountDetailsResponse>(false, "");
+            return new Result<AccountDetailsResponse>(false, ErrorMessages.Account.NotFound);
         }
 
         return new Result<AccountDetailsResponse>(true, mapper.Map<AccountDetailsResponse>(account));

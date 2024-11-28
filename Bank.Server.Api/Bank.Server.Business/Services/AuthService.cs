@@ -3,6 +3,7 @@ using Bank.Server.Business.Abstractions;
 using Bank.Server.Business.Extensions;
 using Bank.Server.Core.Entities;
 using Bank.Server.Persistence;
+using Bank.Server.Shared.Constants;
 using Bank.Server.Shared.Helpers;
 using Bank.Server.Shared.Requests.Auth;
 using Microsoft.EntityFrameworkCore;
@@ -34,7 +35,7 @@ public class AuthService(BankMasterDbContext dbContext, ITokenService tokenServi
         var user = await dbContext.Users.FirstOrDefaultAsync(x => x.Email == request.Email);
         if (user is null || HashExtension.GetHash(request.Password) != user.PasswordHash) 
         {
-            return new Result<string>(false, "");
+            return new Result<string>(false, ErrorMessages.Auth.InvadidEmailOrPassword);
         }
 
         return new Result<string>(true, data: tokenService.GenerateToken(user));

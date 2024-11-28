@@ -1,6 +1,7 @@
 ﻿using Bank.Server.Business.Abstractions;
 using Bank.Server.Core.Entities;
 using Bank.Server.Persistence;
+using Bank.Server.Shared.Constants;
 using Bank.Server.Shared.Helpers;
 using Bank.Server.Shared.Requests.Transactions;
 using Microsoft.EntityFrameworkCore;
@@ -17,20 +18,51 @@ public class TransactionService(BankMasterDbContext dbContext) : ITransactionSer
         var receiverAccount = request.ReceiverAccountId is not null ?
             await dbContext.Accounts.FindAsync(request.ReceiverAccountId, cancellationToken)
             : null;
+
         switch (request.Type)
         {
             case Core.Enums.TransactionType.Withdraw:
+                if (senderAccount is null)
+                {
+                    return new Result<bool>(false, ErrorMessages.Account.NotFound);
+                }
+
+                if (senderAccount.Balance < request.Amount)
+                {
+                    return new Result<bool>(false, ErrorMessages.Account.NotEnoughBalance);
+                }
+
                 senderAccount.Balance -= request.Amount;
                 break;
             case Core.Enums.TransactionType.Deposit:
+                if (receiverAccount is null)
+                {
+                    return new Result<bool>(false, ErrorMessages.Account.NotFound);
+                }
+
                 receiverAccount.Balance += request.Amount;
                 break;
             case Core.Enums.TransactionType.Transfer:
+                if (senderAccount is null)
+                {
+                    return new Result<bool>(false, ErrorMessages.Account.NotFound);
+                }
+
+                if (receiverAccount is null)
+                {
+                    return new Result<bool>(false, ErrorMessages.Account.NotFound);
+                }
+
+                if (senderAccount.Balance < request.Amount)
+                {
+                    return new Result<bool>(false, ErrorMessages.Account.NotEnoughBalance);
+                }
+
                 senderAccount.Balance -= request.Amount;
                 receiverAccount.Balance += request.Amount;
                 break;
             default:
-                return new Result<bool>(false, "");
+                return new Result<bool>(false, ErrorMessages.Transaction.InvalidType);
         }
 
         var performedTransaction = new Transaction
