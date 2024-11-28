@@ -4,7 +4,9 @@ namespace Bank.Server.Shared.Requests.Transactions;
 
 public class PerformTransactionRequest
 {
-    public long? ReceiverId { get; set; }
+    public long? SenderAccountId { get; set; }
+
+    public long? ReceiverAccountId { get; set; }
 
     public float Amount { get; set; }
 

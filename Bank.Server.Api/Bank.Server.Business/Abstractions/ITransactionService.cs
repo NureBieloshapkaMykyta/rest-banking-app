@@ -5,5 +5,5 @@ namespace Bank.Server.Business.Abstractions;
 
 public interface ITransactionService
 {
-    Task<Result<bool>> PerformTransactionAsync(long userId, PerformTransactionRequest request, CancellationToken cancellationToken = default);
+    Task<Result<bool>> PerformTransactionAsync(PerformTransactionRequest request, CancellationToken cancellationToken = default);
 }

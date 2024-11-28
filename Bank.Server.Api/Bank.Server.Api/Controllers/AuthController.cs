@@ -31,6 +31,6 @@ public class AuthController(IAuthService authService) : Controller
             return BadRequest(result.Message);
         }
 
-        return Ok();
+        return Ok(result.Data);
     }
 }

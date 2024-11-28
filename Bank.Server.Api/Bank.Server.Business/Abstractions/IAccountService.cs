@@ -8,5 +8,5 @@ public interface IAccountService
 {
     Task<Result<bool>> CreateAccountAsync(long userId, CancellationToken cancellationToken = default);
     Task<Result<AccountDetailsResponse>> GetAccountDetailsByNumberAsync(GetAccountDetailsRequest request, CancellationToken cancellationToken = default);
-    Task<Result<ICollection<AccountResponse>>> GetUserAccountsAsync(long userId, CancellationToken cancellationToken = default);
+    Task<Result<List<AccountResponse>>> GetUserAccountsAsync(long userId, CancellationToken cancellationToken = default);
 }
