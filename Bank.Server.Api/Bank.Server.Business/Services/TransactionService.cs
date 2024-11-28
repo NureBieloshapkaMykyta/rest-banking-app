@@ -58,6 +58,11 @@ public class TransactionService(BankMasterDbContext dbContext) : ITransactionSer
                     return new Result<bool>(false, ErrorMessages.Account.NotEnoughBalance);
                 }
 
+                if (request.SenderAccountId == request.ReceiverAccountId)
+                {
+                    return new Result<bool>(false, ErrorMessages.Transaction.SameAccounts);
+                }
+
                 senderAccount.Balance -= request.Amount;
                 receiverAccount.Balance += request.Amount;
                 break;

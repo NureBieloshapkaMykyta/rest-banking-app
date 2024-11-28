@@ -16,5 +16,6 @@ public class ErrorMessages
     public class Transaction
     {
         public const string InvalidType = "Invalid transaction type";
+        public const string SameAccounts = "Cannot perform transaction between same accounts";
     }
 }
