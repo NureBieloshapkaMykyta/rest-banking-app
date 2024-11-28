@@ -1,0 +1,26 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UserSecretsId>993b0337-98cd-4be1-b3a8-ee1152b27ee7</UserSecretsId>
+  </PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="AutoMapper" Version="13.0.1" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.0">
+			<PrivateAssets>all</PrivateAssets>
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
+		<PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
+	</ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Bank.Server.Business\Bank.Server.Business.csproj" />
+    <ProjectReference Include="..\Bank.Server.Core\Bank.Server.Core.csproj" />
+    <ProjectReference Include="..\BAnk.Server.Infrastructure\Bank.Server.Infrastructure.csproj" />
+    <ProjectReference Include="..\Shared\Bank.Server.Shared.csproj" />
+  </ItemGroup>
+
+</Project>
